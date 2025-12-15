@@ -1,0 +1,5 @@
+"""
+Colorectal WSI segmentation package.
+"""
+
+
