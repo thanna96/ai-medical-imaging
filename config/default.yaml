@@ -1,0 +1,51 @@
+paths:
+  project_root: .
+  data_root: data
+  raw_data: data/raw/colorectal-cancer-wsi
+  processed_images: data/processed/images
+  processed_masks: data/processed/masks
+  splits: data/splits
+  checkpoints: checkpoints
+  logs: outputs/logs
+  visualizations: outputs/visualizations
+
+data:
+  image_size: 256
+  num_classes: 6
+  class_names:
+    - normal
+    - polyp
+    - low_grade_intraepithelial_neoplasia
+    - high_grade_intraepithelial_neoplasia
+    - serrated_adenoma
+    - adenocarcinoma
+  normalization:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+training:
+  batch_size: 4
+  num_workers: 2
+  num_epochs: 30
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-5
+  device: cpu
+  seed: 42
+  gradient_clip: 1.0
+
+model:
+  in_channels: 3
+  num_classes: 6
+  base_channels: 32
+
+loss:
+  dice_weight: 1.0
+  ignore_index: -1
+
+scheduler:
+  type: reduce_on_plateau
+  factor: 0.5
+  patience: 5
+  min_lr: 1.0e-6
+
+
